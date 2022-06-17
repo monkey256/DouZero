@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package DDZ;
+
+service AI
+{
+    rpc OnQueryNextPlay (QueryNextPlayReq) returns (QueryNextPlayAck) {}
+}
+
+
+message CardArray
+{
+    repeated int32 cards = 1;               //牌数组
+}
+
+message PlayerData
+{
+    string position = 1;                    //座位(landlord|landlord_up|landlord_down)
+    repeated int32 hand_cards = 2;          //当前手牌
+    repeated int32 played_cards = 3;        //已出过的牌 [a,b,c,d,e]
+}
+
+message QueryNextPlayReq
+{
+    string my_position = 1;                     //当前出牌座位(landlord|landlord_up|landlord_down)
+    repeated PlayerData player_datas = 2;       //每个玩家的出牌情况
+    repeated int32 three_landlord_cards = 3;    //剩余3张地主附加牌（移除已打出的）
+    repeated CardArray card_play_action_seq = 4;//已出牌序列数组
+    int32 bomb_num = 5;                         //当前炸弹数量
+}
+message QueryNextPlayAck
+{
+    int32 errcode = 1;                          //0成功
+    repeated int32 result = 2;                  //出牌结果
+}
