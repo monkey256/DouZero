@@ -2,3 +2,7 @@ torch>=1.6.0
 GitPython
 gitdb2
 rlcard
+douzero
+protobuf
+grpcio
+grpcio_tools
