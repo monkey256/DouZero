@@ -1,5 +1,6 @@
 from collections import Counter
 import numpy as np
+import random
 
 from douzero.env.game import GameEnv
 
@@ -17,6 +18,8 @@ for i in range(3, 15):
     deck.extend([i for _ in range(4)])
 deck.extend([17 for _ in range(4)])
 deck.extend([20, 30])
+
+deck_booms = [3,4,5,6,7,8,9,10,11,12,13,14,17,20]
 
 class Env:
     """
@@ -55,14 +58,56 @@ class Env:
         """
         self._env.reset()
 
-        # Randomly shuffle the deck
-        _deck = deck.copy()
-        np.random.shuffle(_deck)
-        card_play_data = {'landlord': _deck[:20],
-                          'landlord_up': _deck[20:37],
-                          'landlord_down': _deck[37:54],
-                          'three_landlord_cards': _deck[17:20],
-                          }
+        card_play_data = None
+
+        if False:
+            #使用纯随机发牌
+            # Randomly shuffle the deck
+            _deck = deck.copy()
+            np.random.shuffle(_deck)
+            card_play_data = {'landlord': _deck[:20],
+                            'landlord_up': _deck[20:37],
+                            'landlord_down': _deck[37:54],
+                            'three_landlord_cards': _deck[17:20],
+                            }
+        else:
+            #使用公平发牌
+            _deck_booms = deck_booms.copy()
+            _exist_booms = []
+            np.random.shuffle(_deck_booms)
+            
+            player_cards = [[], [], []]
+            for v in player_cards:
+                booms_amount = random.randint(1, 4)
+                for _ in range(booms_amount):
+                    n = _deck_booms[-1]
+                    _deck_booms.pop()
+                    _exist_booms.append(n)
+                    if n != 20:
+                        v.extend([n for _ in range(4)])
+                    else:
+                        v.extend([20, 30])
+
+            left_cards = []
+            for c in _deck_booms:
+                if c != 20:
+                    left_cards.extend([c for _ in range(4)])
+                else:
+                    left_cards.extend([20, 30])
+            np.random.shuffle(left_cards)
+
+            for v in player_cards:
+                while len(v) < 17:
+                    c = left_cards[-1]
+                    left_cards.pop()
+                    v.append(c)
+            
+            card_play_data = {'landlord': player_cards[0],
+                            'landlord_up': player_cards[1],
+                            'landlord_down': player_cards[2],
+                            'three_landlord_cards': left_cards
+                            }
+        
         for key in card_play_data:
             card_play_data[key].sort()
 
