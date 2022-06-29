@@ -8,6 +8,7 @@ from douzero.env.game import InfoSet
 from douzero.evaluation.deep_agent import DeepAgent
 from douzero.env import move_detector as md, move_selector as ms
 from douzero.env.move_generator import MovesGener
+from douzero.env.game import GameEnv
 
 def get_legal_card_play_actions(player_hand_cards, card_play_action_seq):
     mg = MovesGener(player_hand_cards)
@@ -214,8 +215,67 @@ class DdzServicer(Ddzai_pb2_grpc.AIServicer):
         print('出牌：{}'.format(action))
         return ack
 
+    def OnEvaluateReq(self, request, context):
+        arr = [
+            [v for v in request.pos1_cards],
+            [v for v in request.pos2_cards],
+            [v for v in request.pos3_cards]
+        ]
+        three_cards = [v for v in request.three_landlord_cards]
+        cards_sequence = [
+            {'landlord': arr[0].copy(),
+             'landlord_up': arr[2].copy(),
+             'landlord_down': arr[1].copy(),
+             'three_landlord_cards': three_cards.copy()
+            },
+            {'landlord': arr[0].copy(),
+             'landlord_up': arr[1].copy(),
+             'landlord_down': arr[2].copy(),
+             'three_landlord_cards': three_cards.copy()
+            },
+            {'landlord': arr[1].copy(),
+             'landlord_up': arr[0].copy(),
+             'landlord_down': arr[2].copy(),
+             'three_landlord_cards': three_cards.copy()
+            },
+            {'landlord': arr[1].copy(),
+             'landlord_up': arr[2].copy(),
+             'landlord_down': arr[0].copy(),
+             'three_landlord_cards': three_cards.copy()
+            },
+            {'landlord': arr[2].copy(),
+             'landlord_up': arr[1].copy(),
+             'landlord_down': arr[0].copy(),
+             'three_landlord_cards': three_cards.copy()
+            },
+            {'landlord': arr[2].copy(),
+             'landlord_up': arr[0].copy(),
+             'landlord_down': arr[1].copy(),
+             'three_landlord_cards': three_cards.copy()
+            },
+        ]
+        results = []
+        for card_play_data in cards_sequence:
+            env = GameEnv(PlayersADP)
+            env.card_play_init(card_play_data)
+            while not env.game_over:
+                env.step()
+            result = {}
+            if env.num_wins['landlord'] > 0:
+                result['win_type'] = 1
+            else:
+                result['win_type'] = 2
+            result['boom_count'] = env.bomb_num
+            result['landlord_left_count'] = len(env.info_sets['landlord'].player_hand_cards)
+            result['landlord_up_left_count'] = len(env.info_sets['landlord_up'].player_hand_cards)
+            result['landlord_down_left_count'] = len(env.info_sets['landlord_down'].player_hand_cards)
+            results.append(result)
+        ack = Ddzai_pb2.EvaluateAck(errcode=0, result=results)
+        print('评估：{}'.format(results))
+        return ack
+
 def main(port):
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=1))
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=4))
     servicer = DdzServicer()
     Ddzai_pb2_grpc.add_AIServicer_to_server(servicer, server)
     server.add_insecure_port('0.0.0.0:{}'.format(port))

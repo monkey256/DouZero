@@ -71,7 +71,7 @@ class Env:
                             'three_landlord_cards': _deck[17:20],
                             }
         else:
-            #使用公平发牌
+            #使用多炸弹发牌
             _deck_booms = deck_booms.copy()
             _exist_booms = []
             np.random.shuffle(_deck_booms)

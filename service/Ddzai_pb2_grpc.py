@@ -19,12 +19,23 @@ class AIStub(object):
                 request_serializer=Ddzai__pb2.QueryNextPlayReq.SerializeToString,
                 response_deserializer=Ddzai__pb2.QueryNextPlayAck.FromString,
                 )
+        self.OnEvaluateReq = channel.unary_unary(
+                '/DDZ.AI/OnEvaluateReq',
+                request_serializer=Ddzai__pb2.EvaluateReq.SerializeToString,
+                response_deserializer=Ddzai__pb2.EvaluateAck.FromString,
+                )
 
 
 class AIServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def OnQueryNextPlay(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def OnEvaluateReq(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -37,6 +48,11 @@ def add_AIServicer_to_server(servicer, server):
                     servicer.OnQueryNextPlay,
                     request_deserializer=Ddzai__pb2.QueryNextPlayReq.FromString,
                     response_serializer=Ddzai__pb2.QueryNextPlayAck.SerializeToString,
+            ),
+            'OnEvaluateReq': grpc.unary_unary_rpc_method_handler(
+                    servicer.OnEvaluateReq,
+                    request_deserializer=Ddzai__pb2.EvaluateReq.FromString,
+                    response_serializer=Ddzai__pb2.EvaluateAck.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -62,5 +78,22 @@ class AI(object):
         return grpc.experimental.unary_unary(request, target, '/DDZ.AI/OnQueryNextPlay',
             Ddzai__pb2.QueryNextPlayReq.SerializeToString,
             Ddzai__pb2.QueryNextPlayAck.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def OnEvaluateReq(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/DDZ.AI/OnEvaluateReq',
+            Ddzai__pb2.EvaluateReq.SerializeToString,
+            Ddzai__pb2.EvaluateAck.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

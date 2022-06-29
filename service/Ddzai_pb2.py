@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0b\x44\x64zai.proto\x12\x03\x44\x44Z\"\x1a\n\tCardArray\x12\r\n\x05\x63\x61rds\x18\x01 \x03(\x05\"H\n\nPlayerData\x12\x10\n\x08position\x18\x01 \x01(\t\x12\x12\n\nhand_cards\x18\x02 \x03(\x05\x12\x14\n\x0cplayed_cards\x18\x03 \x03(\x05\"\xac\x01\n\x10QueryNextPlayReq\x12\x13\n\x0bmy_position\x18\x01 \x01(\t\x12%\n\x0cplayer_datas\x18\x02 \x03(\x0b\x32\x0f.DDZ.PlayerData\x12\x1c\n\x14three_landlord_cards\x18\x03 \x03(\x05\x12,\n\x14\x63\x61rd_play_action_seq\x18\x04 \x03(\x0b\x32\x0e.DDZ.CardArray\x12\x10\n\x08\x62omb_num\x18\x05 \x01(\x05\"3\n\x10QueryNextPlayAck\x12\x0f\n\x07\x65rrcode\x18\x01 \x01(\x05\x12\x0e\n\x06result\x18\x02 \x03(\x05\x32G\n\x02\x41I\x12\x41\n\x0fOnQueryNextPlay\x12\x15.DDZ.QueryNextPlayReq\x1a\x15.DDZ.QueryNextPlayAck\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0b\x44\x64zai.proto\x12\x03\x44\x44Z\"\x1a\n\tCardArray\x12\r\n\x05\x63\x61rds\x18\x01 \x03(\x05\"H\n\nPlayerData\x12\x10\n\x08position\x18\x01 \x01(\t\x12\x12\n\nhand_cards\x18\x02 \x03(\x05\x12\x14\n\x0cplayed_cards\x18\x03 \x03(\x05\"\xac\x01\n\x10QueryNextPlayReq\x12\x13\n\x0bmy_position\x18\x01 \x01(\t\x12%\n\x0cplayer_datas\x18\x02 \x03(\x0b\x32\x0f.DDZ.PlayerData\x12\x1c\n\x14three_landlord_cards\x18\x03 \x03(\x05\x12,\n\x14\x63\x61rd_play_action_seq\x18\x04 \x03(\x0b\x32\x0e.DDZ.CardArray\x12\x10\n\x08\x62omb_num\x18\x05 \x01(\x05\"3\n\x10QueryNextPlayAck\x12\x0f\n\x07\x65rrcode\x18\x01 \x01(\x05\x12\x0e\n\x06result\x18\x02 \x03(\x05\"\x95\x01\n\x0e\x45valuateResult\x12\x10\n\x08win_type\x18\x01 \x01(\x05\x12\x12\n\nboom_count\x18\x02 \x01(\x05\x12\x1b\n\x13landlord_left_count\x18\x03 \x01(\x05\x12\x1e\n\x16landlord_up_left_count\x18\x04 \x01(\x05\x12 \n\x18landlord_down_left_count\x18\x05 \x01(\x05\"g\n\x0b\x45valuateReq\x12\x12\n\npos1_cards\x18\x01 \x03(\x05\x12\x12\n\npos2_cards\x18\x02 \x03(\x05\x12\x12\n\npos3_cards\x18\x03 \x03(\x05\x12\x1c\n\x14three_landlord_cards\x18\x04 \x03(\x05\"D\n\x0b\x45valuateAck\x12\x0f\n\x07\x65rrcode\x18\x01 \x01(\x05\x12$\n\x07results\x18\x02 \x03(\x0b\x32\x13.DDZ.EvaluateResult2~\n\x02\x41I\x12\x41\n\x0fOnQueryNextPlay\x12\x15.DDZ.QueryNextPlayReq\x1a\x15.DDZ.QueryNextPlayAck\"\x00\x12\x35\n\rOnEvaluateReq\x12\x10.DDZ.EvaluateReq\x1a\x10.DDZ.EvaluateAck\"\x00\x62\x06proto3')
 
 
 
@@ -22,6 +22,9 @@ _CARDARRAY = DESCRIPTOR.message_types_by_name['CardArray']
 _PLAYERDATA = DESCRIPTOR.message_types_by_name['PlayerData']
 _QUERYNEXTPLAYREQ = DESCRIPTOR.message_types_by_name['QueryNextPlayReq']
 _QUERYNEXTPLAYACK = DESCRIPTOR.message_types_by_name['QueryNextPlayAck']
+_EVALUATERESULT = DESCRIPTOR.message_types_by_name['EvaluateResult']
+_EVALUATEREQ = DESCRIPTOR.message_types_by_name['EvaluateReq']
+_EVALUATEACK = DESCRIPTOR.message_types_by_name['EvaluateAck']
 CardArray = _reflection.GeneratedProtocolMessageType('CardArray', (_message.Message,), {
   'DESCRIPTOR' : _CARDARRAY,
   '__module__' : 'Ddzai_pb2'
@@ -50,6 +53,27 @@ QueryNextPlayAck = _reflection.GeneratedProtocolMessageType('QueryNextPlayAck', 
   })
 _sym_db.RegisterMessage(QueryNextPlayAck)
 
+EvaluateResult = _reflection.GeneratedProtocolMessageType('EvaluateResult', (_message.Message,), {
+  'DESCRIPTOR' : _EVALUATERESULT,
+  '__module__' : 'Ddzai_pb2'
+  # @@protoc_insertion_point(class_scope:DDZ.EvaluateResult)
+  })
+_sym_db.RegisterMessage(EvaluateResult)
+
+EvaluateReq = _reflection.GeneratedProtocolMessageType('EvaluateReq', (_message.Message,), {
+  'DESCRIPTOR' : _EVALUATEREQ,
+  '__module__' : 'Ddzai_pb2'
+  # @@protoc_insertion_point(class_scope:DDZ.EvaluateReq)
+  })
+_sym_db.RegisterMessage(EvaluateReq)
+
+EvaluateAck = _reflection.GeneratedProtocolMessageType('EvaluateAck', (_message.Message,), {
+  'DESCRIPTOR' : _EVALUATEACK,
+  '__module__' : 'Ddzai_pb2'
+  # @@protoc_insertion_point(class_scope:DDZ.EvaluateAck)
+  })
+_sym_db.RegisterMessage(EvaluateAck)
+
 _AI = DESCRIPTOR.services_by_name['AI']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
@@ -62,6 +86,12 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _QUERYNEXTPLAYREQ._serialized_end=295
   _QUERYNEXTPLAYACK._serialized_start=297
   _QUERYNEXTPLAYACK._serialized_end=348
-  _AI._serialized_start=350
-  _AI._serialized_end=421
+  _EVALUATERESULT._serialized_start=351
+  _EVALUATERESULT._serialized_end=500
+  _EVALUATEREQ._serialized_start=502
+  _EVALUATEREQ._serialized_end=605
+  _EVALUATEACK._serialized_start=607
+  _EVALUATEACK._serialized_end=675
+  _AI._serialized_start=677
+  _AI._serialized_end=803
 # @@protoc_insertion_point(module_scope)

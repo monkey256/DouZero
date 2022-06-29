@@ -5,6 +5,7 @@ package DDZ;
 service AI
 {
     rpc OnQueryNextPlay (QueryNextPlayReq) returns (QueryNextPlayAck) {}
+    rpc OnEvaluateReq (EvaluateReq) returns (EvaluateAck) {}
 }
 
 
@@ -32,4 +33,25 @@ message QueryNextPlayAck
 {
     int32 errcode = 1;                          //0成功
     repeated int32 result = 2;                  //出牌结果
+}
+
+message EvaluateResult
+{
+    int32 win_type = 1;                         //1地主胜 2农民胜
+    int32 boom_count = 2;                       //炸弹数量
+    int32 landlord_left_count = 3;              //地主剩余牌数
+    int32 landlord_up_left_count = 4;           //地主上家剩余牌数
+    int32 landlord_down_left_count = 5;         //地主下家剩余牌数
+}
+message EvaluateReq
+{
+    repeated int32 pos1_cards = 1;              //1号牌
+    repeated int32 pos2_cards = 2;              //2号牌
+    repeated int32 pos3_cards = 3;              //3号牌
+    repeated int32 three_landlord_cards = 4;    //剩余三张牌
+}
+message EvaluateAck
+{
+    int32 errcode = 1;                          //0成功
+    repeated EvaluateResult results = 2;        //轮流当地主的评估结果:123-132-231-213-312-321
 }
