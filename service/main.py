@@ -270,7 +270,7 @@ class DdzServicer(Ddzai_pb2_grpc.AIServicer):
             result['landlord_up_left_count'] = len(env.info_sets['landlord_up'].player_hand_cards)
             result['landlord_down_left_count'] = len(env.info_sets['landlord_down'].player_hand_cards)
             results.append(result)
-        ack = Ddzai_pb2.EvaluateAck(errcode=0, result=results)
+        ack = Ddzai_pb2.EvaluateAck(errcode=0, results=results)
         print('评估：{}'.format(results))
         return ack
 
