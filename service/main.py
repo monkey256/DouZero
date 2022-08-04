@@ -223,32 +223,32 @@ class DdzServicer(Ddzai_pb2_grpc.AIServicer):
         ]
         three_cards = [v for v in request.three_landlord_cards]
         cards_sequence = [
-            {'landlord': arr[0].copy(),
+            {'landlord': arr[0] + three_cards,
              'landlord_up': arr[2].copy(),
              'landlord_down': arr[1].copy(),
              'three_landlord_cards': three_cards.copy()
             },
-            {'landlord': arr[0].copy(),
+            {'landlord': arr[0] + three_cards,
              'landlord_up': arr[1].copy(),
              'landlord_down': arr[2].copy(),
              'three_landlord_cards': three_cards.copy()
             },
-            {'landlord': arr[1].copy(),
+            {'landlord': arr[1] + three_cards,
              'landlord_up': arr[0].copy(),
              'landlord_down': arr[2].copy(),
              'three_landlord_cards': three_cards.copy()
             },
-            {'landlord': arr[1].copy(),
+            {'landlord': arr[1] + three_cards,
              'landlord_up': arr[2].copy(),
              'landlord_down': arr[0].copy(),
              'three_landlord_cards': three_cards.copy()
             },
-            {'landlord': arr[2].copy(),
+            {'landlord': arr[2] + three_cards,
              'landlord_up': arr[1].copy(),
              'landlord_down': arr[0].copy(),
              'three_landlord_cards': three_cards.copy()
             },
-            {'landlord': arr[2].copy(),
+            {'landlord': arr[2] + three_cards,
              'landlord_up': arr[0].copy(),
              'landlord_down': arr[1].copy(),
              'three_landlord_cards': three_cards.copy()

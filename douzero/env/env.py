@@ -60,7 +60,7 @@ class Env:
 
         card_play_data = None
 
-        if False:
+        if True:
             #使用纯随机发牌
             # Randomly shuffle the deck
             _deck = deck.copy()
@@ -102,7 +102,7 @@ class Env:
                     left_cards.pop()
                     v.append(c)
             
-            card_play_data = {'landlord': player_cards[0],
+            card_play_data = {'landlord': player_cards[0] + left_cards,
                             'landlord_up': player_cards[1],
                             'landlord_down': player_cards[2],
                             'three_landlord_cards': left_cards
