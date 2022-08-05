@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0b\x44\x64zai.proto\x12\x03\x44\x44Z\"\x1a\n\tCardArray\x12\r\n\x05\x63\x61rds\x18\x01 \x03(\x05\"H\n\nPlayerData\x12\x10\n\x08position\x18\x01 \x01(\t\x12\x12\n\nhand_cards\x18\x02 \x03(\x05\x12\x14\n\x0cplayed_cards\x18\x03 \x03(\x05\"\xac\x01\n\x10QueryNextPlayReq\x12\x13\n\x0bmy_position\x18\x01 \x01(\t\x12%\n\x0cplayer_datas\x18\x02 \x03(\x0b\x32\x0f.DDZ.PlayerData\x12\x1c\n\x14three_landlord_cards\x18\x03 \x03(\x05\x12,\n\x14\x63\x61rd_play_action_seq\x18\x04 \x03(\x0b\x32\x0e.DDZ.CardArray\x12\x10\n\x08\x62omb_num\x18\x05 \x01(\x05\"3\n\x10QueryNextPlayAck\x12\x0f\n\x07\x65rrcode\x18\x01 \x01(\x05\x12\x0e\n\x06result\x18\x02 \x03(\x05\"\x95\x01\n\x0e\x45valuateResult\x12\x10\n\x08win_type\x18\x01 \x01(\x05\x12\x12\n\nboom_count\x18\x02 \x01(\x05\x12\x1b\n\x13landlord_left_count\x18\x03 \x01(\x05\x12\x1e\n\x16landlord_up_left_count\x18\x04 \x01(\x05\x12 \n\x18landlord_down_left_count\x18\x05 \x01(\x05\"g\n\x0b\x45valuateReq\x12\x12\n\npos1_cards\x18\x01 \x03(\x05\x12\x12\n\npos2_cards\x18\x02 \x03(\x05\x12\x12\n\npos3_cards\x18\x03 \x03(\x05\x12\x1c\n\x14three_landlord_cards\x18\x04 \x03(\x05\"D\n\x0b\x45valuateAck\x12\x0f\n\x07\x65rrcode\x18\x01 \x01(\x05\x12$\n\x07results\x18\x02 \x03(\x0b\x32\x13.DDZ.EvaluateResult2~\n\x02\x41I\x12\x41\n\x0fOnQueryNextPlay\x12\x15.DDZ.QueryNextPlayReq\x1a\x15.DDZ.QueryNextPlayAck\"\x00\x12\x35\n\rOnEvaluateReq\x12\x10.DDZ.EvaluateReq\x1a\x10.DDZ.EvaluateAck\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0b\x44\x64zai.proto\x12\x03\x44\x44Z\"\x1a\n\tCardArray\x12\r\n\x05\x63\x61rds\x18\x01 \x03(\x05\"H\n\nPlayerData\x12\x10\n\x08position\x18\x01 \x01(\t\x12\x12\n\nhand_cards\x18\x02 \x03(\x05\x12\x14\n\x0cplayed_cards\x18\x03 \x03(\x05\"\xac\x01\n\x10QueryNextPlayReq\x12\x13\n\x0bmy_position\x18\x01 \x01(\t\x12%\n\x0cplayer_datas\x18\x02 \x03(\x0b\x32\x0f.DDZ.PlayerData\x12\x1c\n\x14three_landlord_cards\x18\x03 \x03(\x05\x12,\n\x14\x63\x61rd_play_action_seq\x18\x04 \x03(\x0b\x32\x0e.DDZ.CardArray\x12\x10\n\x08\x62omb_num\x18\x05 \x01(\x05\"3\n\x10QueryNextPlayAck\x12\x0f\n\x07\x65rrcode\x18\x01 \x01(\x05\x12\x0e\n\x06result\x18\x02 \x03(\x05\"\x95\x01\n\x0e\x45valuateResult\x12\x10\n\x08win_type\x18\x01 \x01(\x05\x12\x12\n\nboom_count\x18\x02 \x01(\x05\x12\x1b\n\x13landlord_left_count\x18\x03 \x01(\x05\x12\x1e\n\x16landlord_up_left_count\x18\x04 \x01(\x05\x12 \n\x18landlord_down_left_count\x18\x05 \x01(\x05\"g\n\x0b\x45valuateReq\x12\x12\n\npos1_cards\x18\x01 \x03(\x05\x12\x12\n\npos2_cards\x18\x02 \x03(\x05\x12\x12\n\npos3_cards\x18\x03 \x03(\x05\x12\x1c\n\x14three_landlord_cards\x18\x04 \x03(\x05\"D\n\x0b\x45valuateAck\x12\x0f\n\x07\x65rrcode\x18\x01 \x01(\x05\x12$\n\x07results\x18\x02 \x03(\x0b\x32\x13.DDZ.EvaluateResult\" \n\x0fPatternSequence\x12\r\n\x05\x63\x61rds\x18\x01 \x03(\x05\"X\n\x1a\x45valuatePatternSequenceReq\x12\x12\n\npos1_cards\x18\x01 \x03(\x05\x12\x12\n\npos2_cards\x18\x02 \x03(\x05\x12\x12\n\npos3_cards\x18\x03 \x03(\x05\"U\n\x1a\x45valuatePatternSequenceAck\x12\x0f\n\x07\x65rrcode\x18\x01 \x01(\x05\x12&\n\x08sequence\x18\x02 \x03(\x0b\x32\x14.DDZ.PatternSequence2\xe2\x01\n\x02\x41I\x12\x41\n\x0fOnQueryNextPlay\x12\x15.DDZ.QueryNextPlayReq\x1a\x15.DDZ.QueryNextPlayAck\"\x00\x12\x35\n\rOnEvaluateReq\x12\x10.DDZ.EvaluateReq\x1a\x10.DDZ.EvaluateAck\"\x00\x12\x62\n\x1cOnEvaluatePatternSequenceReq\x12\x1f.DDZ.EvaluatePatternSequenceReq\x1a\x1f.DDZ.EvaluatePatternSequenceAck\"\x00\x62\x06proto3')
 
 
 
@@ -25,6 +25,9 @@ _QUERYNEXTPLAYACK = DESCRIPTOR.message_types_by_name['QueryNextPlayAck']
 _EVALUATERESULT = DESCRIPTOR.message_types_by_name['EvaluateResult']
 _EVALUATEREQ = DESCRIPTOR.message_types_by_name['EvaluateReq']
 _EVALUATEACK = DESCRIPTOR.message_types_by_name['EvaluateAck']
+_PATTERNSEQUENCE = DESCRIPTOR.message_types_by_name['PatternSequence']
+_EVALUATEPATTERNSEQUENCEREQ = DESCRIPTOR.message_types_by_name['EvaluatePatternSequenceReq']
+_EVALUATEPATTERNSEQUENCEACK = DESCRIPTOR.message_types_by_name['EvaluatePatternSequenceAck']
 CardArray = _reflection.GeneratedProtocolMessageType('CardArray', (_message.Message,), {
   'DESCRIPTOR' : _CARDARRAY,
   '__module__' : 'Ddzai_pb2'
@@ -74,6 +77,27 @@ EvaluateAck = _reflection.GeneratedProtocolMessageType('EvaluateAck', (_message.
   })
 _sym_db.RegisterMessage(EvaluateAck)
 
+PatternSequence = _reflection.GeneratedProtocolMessageType('PatternSequence', (_message.Message,), {
+  'DESCRIPTOR' : _PATTERNSEQUENCE,
+  '__module__' : 'Ddzai_pb2'
+  # @@protoc_insertion_point(class_scope:DDZ.PatternSequence)
+  })
+_sym_db.RegisterMessage(PatternSequence)
+
+EvaluatePatternSequenceReq = _reflection.GeneratedProtocolMessageType('EvaluatePatternSequenceReq', (_message.Message,), {
+  'DESCRIPTOR' : _EVALUATEPATTERNSEQUENCEREQ,
+  '__module__' : 'Ddzai_pb2'
+  # @@protoc_insertion_point(class_scope:DDZ.EvaluatePatternSequenceReq)
+  })
+_sym_db.RegisterMessage(EvaluatePatternSequenceReq)
+
+EvaluatePatternSequenceAck = _reflection.GeneratedProtocolMessageType('EvaluatePatternSequenceAck', (_message.Message,), {
+  'DESCRIPTOR' : _EVALUATEPATTERNSEQUENCEACK,
+  '__module__' : 'Ddzai_pb2'
+  # @@protoc_insertion_point(class_scope:DDZ.EvaluatePatternSequenceAck)
+  })
+_sym_db.RegisterMessage(EvaluatePatternSequenceAck)
+
 _AI = DESCRIPTOR.services_by_name['AI']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
@@ -92,6 +116,12 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _EVALUATEREQ._serialized_end=605
   _EVALUATEACK._serialized_start=607
   _EVALUATEACK._serialized_end=675
-  _AI._serialized_start=677
-  _AI._serialized_end=803
+  _PATTERNSEQUENCE._serialized_start=677
+  _PATTERNSEQUENCE._serialized_end=709
+  _EVALUATEPATTERNSEQUENCEREQ._serialized_start=711
+  _EVALUATEPATTERNSEQUENCEREQ._serialized_end=799
+  _EVALUATEPATTERNSEQUENCEACK._serialized_start=801
+  _EVALUATEPATTERNSEQUENCEACK._serialized_end=886
+  _AI._serialized_start=889
+  _AI._serialized_end=1115
 # @@protoc_insertion_point(module_scope)

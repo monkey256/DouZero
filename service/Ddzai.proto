@@ -6,6 +6,7 @@ service AI
 {
     rpc OnQueryNextPlay (QueryNextPlayReq) returns (QueryNextPlayAck) {}
     rpc OnEvaluateReq (EvaluateReq) returns (EvaluateAck) {}
+    rpc OnEvaluatePatternSequenceReq (EvaluatePatternSequenceReq) returns (EvaluatePatternSequenceAck) {}
 }
 
 
@@ -54,4 +55,20 @@ message EvaluateAck
 {
     int32 errcode = 1;                          //0成功
     repeated EvaluateResult results = 2;        //轮流当地主的评估结果:123-132-231-213-312-321
+}
+
+message PatternSequence
+{
+    repeated int32 cards = 1;                   //出牌
+}
+message EvaluatePatternSequenceReq
+{
+    repeated int32 pos1_cards = 1;              //1号牌
+    repeated int32 pos2_cards = 2;              //2号牌
+    repeated int32 pos3_cards = 3;              //3号牌
+}
+message EvaluatePatternSequenceAck
+{
+    int32 errcode = 1;                          //0成功
+    repeated PatternSequence sequence = 2;      //出牌序列
 }

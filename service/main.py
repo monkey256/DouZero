@@ -274,6 +274,65 @@ class DdzServicer(Ddzai_pb2_grpc.AIServicer):
         print('评估：{}'.format(results))
         return ack
 
+    def OnEvaluatePatternSequenceReq(self, request, context):
+        arr = [
+            [v for v in request.pos1_cards],
+            [v for v in request.pos2_cards],
+            [v for v in request.pos3_cards]
+        ]
+        sequence = []
+        iset = InfoSet('landlord')
+        iset.num_cards_left_dict = {
+            'landlord': len(arr[0]),
+            'landlord_up': len(arr[1]),
+            'landlord_down': len(arr[2])
+        }
+        iset.three_landlord_cards = []
+        iset.card_play_action_seq = []
+        iset.other_hand_cards = arr[1] + arr[2]
+        iset.last_move = []
+        iset.last_two_moves = [[],[]]
+        #每个人最近一次出牌情况
+        iset.last_move_dict = {
+            'landlord': [],
+            'landlord_up': [],
+            'landlord_down': [],
+        }
+        #已出过的牌
+        iset.played_cards = {
+            'landlord': [],
+            'landlord_up': [],
+            'landlord_down': []
+        }
+        #每个人手牌
+        iset.all_handcards = {
+            'landlord': arr[0],
+            'landlord_up': arr[1],
+            'landlord_down': arr[2]
+        }
+        #上个玩家出牌座位
+        iset.last_pid = 'landlord'
+        #炸弹数量
+        iset.bomb_num = 0
+        while len(arr[0]) > 0:
+            iset.player_hand_cards = arr[0]
+            iset.num_cards_left_dict['landlord'] = len(arr[0])
+            iset.all_handcards['landlord'] = arr[0]
+            iset.legal_actions = get_legal_card_play_actions(iset.player_hand_cards, iset.card_play_action_seq)
+
+            player = PlayersADP['landlord']
+            action = player.act(iset)
+            sequence.append({
+                'cards': action
+            })
+            for card in action:
+                arr[0].remove(card)
+            arr[0].sort()
+        ack = Ddzai_pb2.EvaluatePatternSequenceAck(errcode=0, sequence=sequence)
+        print('评估出牌序列：{}'.format(sequence))
+        return ack
+        
+
 def main(port):
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=4))
     servicer = DdzServicer()

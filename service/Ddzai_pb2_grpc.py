@@ -24,6 +24,11 @@ class AIStub(object):
                 request_serializer=Ddzai__pb2.EvaluateReq.SerializeToString,
                 response_deserializer=Ddzai__pb2.EvaluateAck.FromString,
                 )
+        self.OnEvaluatePatternSequenceReq = channel.unary_unary(
+                '/DDZ.AI/OnEvaluatePatternSequenceReq',
+                request_serializer=Ddzai__pb2.EvaluatePatternSequenceReq.SerializeToString,
+                response_deserializer=Ddzai__pb2.EvaluatePatternSequenceAck.FromString,
+                )
 
 
 class AIServicer(object):
@@ -41,6 +46,12 @@ class AIServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def OnEvaluatePatternSequenceReq(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_AIServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -53,6 +64,11 @@ def add_AIServicer_to_server(servicer, server):
                     servicer.OnEvaluateReq,
                     request_deserializer=Ddzai__pb2.EvaluateReq.FromString,
                     response_serializer=Ddzai__pb2.EvaluateAck.SerializeToString,
+            ),
+            'OnEvaluatePatternSequenceReq': grpc.unary_unary_rpc_method_handler(
+                    servicer.OnEvaluatePatternSequenceReq,
+                    request_deserializer=Ddzai__pb2.EvaluatePatternSequenceReq.FromString,
+                    response_serializer=Ddzai__pb2.EvaluatePatternSequenceAck.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -95,5 +111,22 @@ class AI(object):
         return grpc.experimental.unary_unary(request, target, '/DDZ.AI/OnEvaluateReq',
             Ddzai__pb2.EvaluateReq.SerializeToString,
             Ddzai__pb2.EvaluateAck.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def OnEvaluatePatternSequenceReq(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/DDZ.AI/OnEvaluatePatternSequenceReq',
+            Ddzai__pb2.EvaluatePatternSequenceReq.SerializeToString,
+            Ddzai__pb2.EvaluatePatternSequenceAck.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
